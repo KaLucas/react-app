@@ -1,19 +1,17 @@
-import { NavLink } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faList,
-  faPen,
-  faPlus,
-  faSignOutAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import { Box, Button } from "@mui/material";
+import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faList, faPen, faPlus, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { Box, Button } from '@mui/material';
+import type { ReactElement } from 'react';
 
 type SidebarProps = {
   openForm: () => void;
   signOut: () => void;
 };
 
-export default function Sidebar({ openForm, signOut }: SidebarProps) {
+export const Sidebar = (props: SidebarProps): ReactElement => {
+  const { openForm, signOut } = props;
+
   return (
     <Box>
       <aside>
@@ -23,9 +21,9 @@ export default function Sidebar({ openForm, signOut }: SidebarProps) {
               <NavLink
                 to="/lista"
                 title="Lista"
-                className={({ isActive }) => (isActive ? "active" : "")}
+                className={ ({ isActive }) => (isActive ? 'active' : '') }
               >
-                <FontAwesomeIcon icon={faList} size="lg" />
+                <FontAwesomeIcon icon={ faList } size="lg" />
                 <span className="menu-item-parent">Filmes Publicados</span>
               </NavLink>
             </li>
@@ -34,23 +32,23 @@ export default function Sidebar({ openForm, signOut }: SidebarProps) {
               <NavLink
                 to="/rascunho"
                 title="Rascunho"
-                className={({ isActive }) => (isActive ? "active" : "")}
+                className={ ({ isActive }) => (isActive ? 'active' : '') }
               >
-                <FontAwesomeIcon icon={faPen} size="lg" />
+                <FontAwesomeIcon icon={ faPen } size="lg" />
                 <span className="menu-item-parent">Rascunho</span>
               </NavLink>
             </li>
 
             <li>
-              <Button type="button" onClick={openForm} variant="text">
-                <FontAwesomeIcon icon={faPlus} size="lg" />
+              <Button type="button" onClick={ openForm } variant="text">
+                <FontAwesomeIcon icon={ faPlus } size="lg" />
                 <span className="menu-item-parent">Cadastrar Novo</span>
               </Button>
             </li>
 
             <li>
-              <Button type="button" onClick={signOut} variant="text">
-                <FontAwesomeIcon icon={faSignOutAlt} size="lg" />
+              <Button type="button" onClick={ signOut } variant="text">
+                <FontAwesomeIcon icon={ faSignOutAlt } size="lg" />
                 <span className="menu-item-parent">Logout</span>
               </Button>
             </li>
@@ -59,5 +57,6 @@ export default function Sidebar({ openForm, signOut }: SidebarProps) {
       </aside>
     </Box>
   );
-}
+};
 
+export default Sidebar;

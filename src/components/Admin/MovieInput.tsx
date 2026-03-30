@@ -1,9 +1,7 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState } from 'react';
 
 export const MovieInput = () => {
-  const [newMovie, setNewMovie] = useState("");
-  const dispatch = useDispatch();
+  const [newMovie, setNewMovie] = useState('');
 
   // const handleAddMovie = () => {
   //   if (newMovie) {
@@ -14,11 +12,10 @@ export const MovieInput = () => {
 
   return (
     <div className="movie-input">
-      <input onChange={(e) => setNewMovie(e.target.value)} value={newMovie} />
+      <input onChange={ (e) => setNewMovie(e.target.value) } value={ newMovie } />
       {/* <button onClick={handleAddMovie}>Add Movie</button> */}
     </div>
   );
 };
 
 export default MovieInput;
-
