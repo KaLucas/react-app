@@ -1,8 +1,8 @@
 import type { ReactElement } from 'react';
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
-import { VisibilityIcon, EditIcon, DeleteIcon } from '../../icons';
+import { VisibilityIcon, EditIcon, DeleteIcon } from '@utils/icons';
 import IconButton from '@mui/material/IconButton';
-import { useGetUsersQuery } from '../../services/api';
+import { useGetUsersQuery } from '@services/api';
 import { Avatar } from '@mui/material';
 
 interface DatagridUsersList {
@@ -45,7 +45,7 @@ export const UsersList = (): ReactElement => {
       headerName: 'Imagem',
       width: 100,
       sortable: false,
-      renderCell: (params) => <Avatar src={ params.value } />,
+      renderCell: (params) => <Avatar src={params.value} />,
     },
     {
       field: 'actions',
@@ -55,15 +55,15 @@ export const UsersList = (): ReactElement => {
       flex: 1,
       renderCell: (params) => (
         <div>
-          <IconButton onClick={ () => handleViewDetails(params.row) }>
+          <IconButton onClick={() => handleViewDetails(params.row)}>
             <VisibilityIcon />
           </IconButton>
 
-          <IconButton onClick={ () => handleEdit(params.row) }>
+          <IconButton onClick={() => handleEdit(params.row)}>
             <EditIcon />
           </IconButton>
 
-          <IconButton onClick={ () => handleDelete(params.row.id) }>
+          <IconButton onClick={() => handleDelete(params.row.id)}>
             <DeleteIcon />
           </IconButton>
         </div>
@@ -87,15 +87,15 @@ export const UsersList = (): ReactElement => {
     <div className="movie-list">
       <h2>Lista de Usuários</h2>
       <DataGrid
-        rows={ rows }
-        columns={ columns }
-        initialState={ {
+        rows={rows}
+        columns={columns}
+        initialState={{
           pagination: {
             paginationModel: {
               pageSize: 10,
             },
           },
-        } }
+        }}
         disableRowSelectionOnClick
       />
     </div>

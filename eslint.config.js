@@ -24,22 +24,15 @@ export default defineConfig([
       globals: globals.browser,
     },
     rules: {
-      // Espaços em objetos, arrays e operadores
       'object-curly-spacing': ['error', 'always'],
       'array-bracket-spacing': ['error', 'never'],
       'space-infix-ops': 'error',
-      'space-before-function-paren': ['error', 'always'],
-
-      // JSX
-      'react/jsx-curly-spacing': ['error', { when: 'always' }],
-
-      // Linha antes do return
+      'space-before-function-paren': 'off',
+      'react/jsx-curly-spacing': ['error', { when: 'never' }],
       'padding-line-between-statements': [
         'error',
         { blankLine: 'always', prev: '*', next: 'return' },
       ],
-
-      // Desativa regra desnecessária no React 17+
       'react/react-in-jsx-scope': 'off',
     },
     settings: {

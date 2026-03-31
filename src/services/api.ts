@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { User } from '../models/user.model';
+import type { User } from '@models/user.model';
 
 interface GetUsers {
   data: Array<User>;

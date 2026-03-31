@@ -1,2 +1,2 @@
-export { Sidebar } from './Sidebar';
-export { EditUser } from './Dialogs';
+export { Sidebar } from './sidebar';
+export { EditUserDialog } from './dialogs';

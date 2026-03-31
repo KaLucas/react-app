@@ -1,1 +1,1 @@
-export { EditUser } from './EditUser';
+export { EditUserDialog } from './edit-user-dialog';
