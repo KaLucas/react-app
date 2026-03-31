@@ -1,11 +1,13 @@
-import type { ReactElement } from 'react';
+import { useState, type ReactElement } from 'react';
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
+import { ptBR } from '@mui/x-data-grid/locales';
 import { VisibilityIcon, EditIcon, DeleteIcon } from '@utils/icons';
 import IconButton from '@mui/material/IconButton';
 import { useGetUsersQuery } from '@services/api';
-import { Avatar } from '@mui/material';
+import { Avatar, Box } from '@mui/material';
+import { EditUserDialog } from '@components';
 
-interface DatagridUsersList {
+export interface DatagridUsersList {
   id: string;
   email: string;
   firstName: string;
@@ -14,7 +16,23 @@ interface DatagridUsersList {
 }
 
 export const UsersList = (): ReactElement => {
-  const { data: usersData, isLoading, isError, error } = useGetUsersQuery({ project_id: '7534' });
+  const [isOpenDialog, setIsOpenDialog] = useState<string | null>(null);
+  const [selectedValue, setSelectedValue] = useState<DatagridUsersList>();
+  const [paginationModel, setPaginationModel] = useState({
+    page: 0,
+    pageSize: 10,
+  });
+
+  const {
+    data: usersData,
+    isLoading,
+    isError,
+    error,
+  } = useGetUsersQuery({
+    project_id: '7534',
+    page: paginationModel.page + 1,
+    limit: paginationModel.pageSize,
+  });
 
   if (isLoading) {
     return <div>Carregando filmes...</div>;
@@ -33,8 +51,6 @@ export const UsersList = (): ReactElement => {
     email: user.data.email,
     avatar: user.data.avatar,
   }));
-
-  console.log('usersData?.data', usersData);
 
   const columns: GridColDef<DatagridUsersList>[] = [
     { field: 'firstName', headerName: 'Nome', flex: 2 },
@@ -76,29 +92,42 @@ export const UsersList = (): ReactElement => {
   };
 
   const handleEdit = (row: DatagridUsersList) => {
-    console.log('Editar:', row);
+    setIsOpenDialog('edit');
+    setSelectedValue(row);
   };
 
   const handleDelete = (id: string) => {
     console.log('Deletar:', id);
   };
 
+  const handleCloseDialog = () => {
+    setIsOpenDialog(null);
+  };
+
   return (
-    <div className="movie-list">
-      <h2>Lista de Usuários</h2>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 10,
-            },
-          },
-        }}
-        disableRowSelectionOnClick
-      />
-    </div>
+    <>
+      <Box>
+        <h2>Lista de Personagens</h2>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          paginationMode="server"
+          rowCount={usersData?.total ?? 0}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
+          pageSizeOptions={[5, 10, 20]}
+          disableRowSelectionOnClick
+          localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
+        />
+      </Box>
+      {isOpenDialog === 'edit' && (
+        <EditUserDialog
+          open={isOpenDialog === 'edit'}
+          onClose={handleCloseDialog}
+          selectedValue={selectedValue as DatagridUsersList}
+        />
+      )}
+    </>
   );
 };
 
