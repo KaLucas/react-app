@@ -24,21 +24,13 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
-    // Folders
-    "baseUrl": "./src",
     "paths": {
-      "@context": ["context"],
-      "@context/*": ["context/*"],
-      "@pages": ["pages"],
-      "@pages/*": ["pages/*"],
-      "@components": ["components"],
-      "@components/*": ["components/*"],
-      "@models": ["models"],
-      "@models/*": ["models/*"],
-      "@services": ["services"],
-      "@services/*": ["services/*"],
-      "@utils": ["utils"],
-      "@utils/*": ["utils/*"]
+      "@context/*": ["./src/context/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@components/*": ["./src/components/*"],
+      "@models/*": ["./src/models/*"],
+      "@services/*": ["./src/services/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   },
   "include": ["src"]

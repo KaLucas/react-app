@@ -18,28 +18,6 @@ export const Sidebar = (props: SidebarProps): ReactElement => {
         <nav>
           <ul className="full-list">
             <li>
-              <NavLink
-                to="/lista"
-                title="Lista"
-                className={({ isActive }) => (isActive ? 'active' : '')}
-              >
-                <FontAwesomeIcon icon={faList} size="lg" />
-                <span className="menu-item-parent">Filmes Publicados</span>
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink
-                to="/rascunho"
-                title="Rascunho"
-                className={({ isActive }) => (isActive ? 'active' : '')}
-              >
-                <FontAwesomeIcon icon={faPen} size="lg" />
-                <span className="menu-item-parent">Rascunho</span>
-              </NavLink>
-            </li>
-
-            <li>
               <Button type="button" onClick={openForm} variant="text">
                 <FontAwesomeIcon icon={faPlus} size="lg" />
                 <span className="menu-item-parent">Cadastrar Novo</span>

@@ -1,22 +1,26 @@
 import { useState, type ReactElement } from 'react';
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
 import { ptBR } from '@mui/x-data-grid/locales';
-import { VisibilityIcon, EditIcon, DeleteIcon } from '@utils/icons';
+import { EditIcon, DeleteIcon } from '@utils/icons';
 import IconButton from '@mui/material/IconButton';
 import { useGetUsersQuery } from '@services/api';
-import { Avatar, Box } from '@mui/material';
-import { EditUserDialog } from '@components';
+import { Box, Typography } from '@mui/material';
+import { EditUserDialog } from '@components/admin';
+import { formatDate } from '@utils/date';
 
 export interface DatagridUsersList {
   id: string;
   email: string;
-  firstName: string;
-  lastName: string;
-  avatar: string;
+  first_name: string;
+  last_name: string;
+  created_at: string;
+  updated_at: string;
 }
 
+type DialogType = 'edit' | 'delete' | 'create' | null;
+
 export const UsersList = (): ReactElement => {
-  const [isOpenDialog, setIsOpenDialog] = useState<string | null>(null);
+  const [isOpenDialog, setIsOpenDialog] = useState<DialogType>(null);
   const [selectedValue, setSelectedValue] = useState<DatagridUsersList>();
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
@@ -46,22 +50,28 @@ export const UsersList = (): ReactElement => {
 
   const rows = (usersData?.data ?? []).map((user) => ({
     id: user.id,
-    firstName: user.data.first_name,
-    lastName: user.data.last_name,
+    first_name: user.data.first_name,
+    last_name: user.data.last_name,
     email: user.data.email,
-    avatar: user.data.avatar,
+    created_at: user.created_at,
+    updated_at: user.updated_at,
   }));
 
   const columns: GridColDef<DatagridUsersList>[] = [
-    { field: 'firstName', headerName: 'Nome', flex: 2 },
-    { field: 'lastName', headerName: 'Sobrenome', flex: 1 },
+    { field: 'first_name', headerName: 'Nome', flex: 1 },
+    { field: 'last_name', headerName: 'Sobrenome', flex: 1 },
     { field: 'email', headerName: 'E-mail', flex: 1 },
     {
-      field: 'avatar',
-      headerName: 'Imagem',
-      width: 100,
-      sortable: false,
-      renderCell: (params) => <Avatar src={params.value} />,
+      field: 'created_at',
+      headerName: 'Criado em',
+      flex: 1,
+      renderCell: (params) => <Typography>{formatDate(params.row.created_at)}</Typography>,
+    },
+    {
+      field: 'updated_at',
+      headerName: 'Atualizado em',
+      flex: 1,
+      renderCell: (params) => <Typography>{formatDate(params.row.updated_at)}</Typography>,
     },
     {
       field: 'actions',
@@ -71,14 +81,9 @@ export const UsersList = (): ReactElement => {
       flex: 1,
       renderCell: (params) => (
         <div>
-          <IconButton onClick={() => handleViewDetails(params.row)}>
-            <VisibilityIcon />
-          </IconButton>
-
           <IconButton onClick={() => handleEdit(params.row)}>
             <EditIcon />
           </IconButton>
-
           <IconButton onClick={() => handleDelete(params.row.id)}>
             <DeleteIcon />
           </IconButton>
@@ -86,10 +91,6 @@ export const UsersList = (): ReactElement => {
       ),
     },
   ];
-
-  const handleViewDetails = (row: DatagridUsersList) => {
-    console.log('Ver detalhes:', row);
-  };
 
   const handleEdit = (row: DatagridUsersList) => {
     setIsOpenDialog('edit');
@@ -107,7 +108,7 @@ export const UsersList = (): ReactElement => {
   return (
     <>
       <Box>
-        <h2>Lista de Personagens</h2>
+        <h2>Lista de Usuários</h2>
         <DataGrid
           rows={rows}
           columns={columns}
@@ -118,6 +119,12 @@ export const UsersList = (): ReactElement => {
           pageSizeOptions={[5, 10, 20]}
           disableRowSelectionOnClick
           localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
+          sx={{
+            '& .MuiDataGrid-cell': {
+              display: 'flex',
+              alignItems: 'center',
+            },
+          }}
         />
       </Box>
       {isOpenDialog === 'edit' && (
