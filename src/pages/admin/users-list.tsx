@@ -7,6 +7,7 @@ import { useGetUsersQuery } from '@services/api';
 import { Box, Typography } from '@mui/material';
 import { EditUserDialog } from '@components/admin';
 import { formatDate } from '@utils/date';
+import { useDialogContext } from '@context/use-dialog-context';
 
 export interface DatagridUsersList {
   id: string;
@@ -17,11 +18,8 @@ export interface DatagridUsersList {
   updated_at: string;
 }
 
-type DialogType = 'edit' | 'delete' | 'create' | null;
-
-export const UsersList = (): ReactElement => {
-  const [isOpenDialog, setIsOpenDialog] = useState<DialogType>(null);
-  const [selectedValue, setSelectedValue] = useState<DatagridUsersList>();
+const UsersList = (): ReactElement => {
+  const { isOpenDialog, selectedValue, openEditDialog, closeDialog } = useDialogContext();
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: 10,
@@ -44,7 +42,6 @@ export const UsersList = (): ReactElement => {
 
   if (isError) {
     console.error('Erro ao buscar filmes:', error);
-
     return <div>Erro ao carregar filmes. Veja o console para detalhes.</div>;
   }
 
@@ -81,7 +78,7 @@ export const UsersList = (): ReactElement => {
       flex: 1,
       renderCell: (params) => (
         <div>
-          <IconButton onClick={() => handleEdit(params.row)}>
+          <IconButton onClick={() => openEditDialog(params.row)}>
             <EditIcon />
           </IconButton>
           <IconButton onClick={() => handleDelete(params.row.id)}>
@@ -92,18 +89,11 @@ export const UsersList = (): ReactElement => {
     },
   ];
 
-  const handleEdit = (row: DatagridUsersList) => {
-    setIsOpenDialog('edit');
-    setSelectedValue(row);
-  };
-
   const handleDelete = (id: string) => {
     console.log('Deletar:', id);
   };
 
-  const handleCloseDialog = () => {
-    setIsOpenDialog(null);
-  };
+  const isDialogOpen = isOpenDialog === 'edit' || isOpenDialog === 'create';
 
   return (
     <>
@@ -116,7 +106,7 @@ export const UsersList = (): ReactElement => {
           rowCount={usersData?.total ?? 0}
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
-          pageSizeOptions={[5, 10, 20]}
+          pageSizeOptions={[5, 10, 25, 50]}
           disableRowSelectionOnClick
           localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
           sx={{
@@ -127,12 +117,8 @@ export const UsersList = (): ReactElement => {
           }}
         />
       </Box>
-      {isOpenDialog === 'edit' && (
-        <EditUserDialog
-          open={isOpenDialog === 'edit'}
-          onClose={handleCloseDialog}
-          selectedValue={selectedValue as DatagridUsersList}
-        />
+      {isDialogOpen && (
+        <EditUserDialog open={isDialogOpen} onClose={closeDialog} selectedValue={selectedValue} />
       )}
     </>
   );

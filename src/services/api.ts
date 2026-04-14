@@ -20,17 +20,16 @@ interface GetUsersArg {
   limit: number;
 }
 
-interface EditUserArg {
+interface CreateUserArg {
   project_id: string;
   data: {
     email: string;
     firstName: string;
-    id: string;
     lastName: string;
   };
 }
 
-interface EditUserResult {
+interface CreateUserResult {
   data: {
     id: string;
     collection_id: string;
@@ -47,6 +46,17 @@ interface EditUserResult {
     };
   };
 }
+interface EditUserArg {
+  project_id: string;
+  data: {
+    email: string;
+    firstName: string;
+    id?: string;
+    lastName: string;
+  };
+}
+
+type EditUserResult = CreateUserResult;
 
 export const usersApi = createApi({
   reducerPath: 'usersApi',
@@ -78,6 +88,28 @@ export const usersApi = createApi({
         };
       },
     }),
+    createUser: builder.mutation<CreateUserResult, CreateUserArg>({
+      query: ({ project_id, data }) => {
+        const { firstName, lastName, email } = data;
+        return {
+          url: `collections/users/records`,
+          method: 'POST',
+          params: { project_id },
+          body: {
+            data: {
+              first_name: firstName,
+              last_name: lastName,
+              email,
+            },
+          },
+          headers: {
+            'x-api-key': import.meta.env.VITE_API_KEY,
+            'X-Reqres-Env': 'production',
+          },
+        };
+      },
+      invalidatesTags: ['Users'],
+    }),
     editUser: builder.mutation<EditUserResult, EditUserArg>({
       query: ({ project_id, data }) => {
         const { firstName, lastName, email, id } = data;
@@ -103,4 +135,4 @@ export const usersApi = createApi({
   }),
 });
 
-export const { useGetUsersQuery, useEditUserMutation } = usersApi;
+export const { useGetUsersQuery, useEditUserMutation, useCreateUserMutation } = usersApi;

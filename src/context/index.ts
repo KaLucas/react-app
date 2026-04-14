@@ -1,1 +1,2 @@
-export { useRecordContext } from './use-record-context';
+export { useDialogContext } from './use-dialog-context';
+export { DialogProvider } from './dialog-provider';

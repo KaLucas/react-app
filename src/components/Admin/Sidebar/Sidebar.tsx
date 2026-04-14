@@ -1,16 +1,11 @@
-import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faList, faPen, faPlus, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { Box, Button } from '@mui/material';
 import type { ReactElement } from 'react';
+import { useDialogContext } from '@context/use-dialog-context';
 
-type SidebarProps = {
-  openForm: () => void;
-  signOut: () => void;
-};
-
-export const Sidebar = (props: SidebarProps): ReactElement => {
-  const { openForm, signOut } = props;
+export const Sidebar = (): ReactElement => {
+  const { openCreateDialog } = useDialogContext();
 
   return (
     <Box>
@@ -18,14 +13,14 @@ export const Sidebar = (props: SidebarProps): ReactElement => {
         <nav>
           <ul className="full-list">
             <li>
-              <Button type="button" onClick={openForm} variant="text">
+              <Button type="button" onClick={openCreateDialog} variant="text">
                 <FontAwesomeIcon icon={faPlus} size="lg" />
                 <span className="menu-item-parent">Cadastrar Novo</span>
               </Button>
             </li>
 
             <li>
-              <Button type="button" onClick={signOut} variant="text">
+              <Button type="button" variant="text">
                 <FontAwesomeIcon icon={faSignOutAlt} size="lg" />
                 <span className="menu-item-parent">Logout</span>
               </Button>
