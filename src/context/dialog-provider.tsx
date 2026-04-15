@@ -19,6 +19,10 @@ export function DialogProvider({ children }: Props) {
     setSelectedValue(undefined);
     setIsOpenDialog('create');
   };
+  const openDeleteDialog = () => {
+    setSelectedValue(undefined);
+    setIsOpenDialog('delete');
+  };
 
   const closeDialog = () => {
     setIsOpenDialog(null);
@@ -27,7 +31,14 @@ export function DialogProvider({ children }: Props) {
 
   return (
     <DialogContext.Provider
-      value={{ isOpenDialog, selectedValue, openEditDialog, openCreateDialog, closeDialog }}
+      value={{
+        isOpenDialog,
+        selectedValue,
+        openEditDialog,
+        openCreateDialog,
+        openDeleteDialog,
+        closeDialog,
+      }}
     >
       {children}
     </DialogContext.Provider>

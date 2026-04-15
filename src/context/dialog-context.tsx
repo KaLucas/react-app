@@ -6,6 +6,7 @@ export interface DialogContextType {
   selectedValue?: DatagridUsersList;
   openEditDialog: (user: DatagridUsersList) => void;
   openCreateDialog: () => void;
+  openDeleteDialog: () => void;
   closeDialog: () => void;
 }
 

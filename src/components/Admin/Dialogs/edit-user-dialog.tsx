@@ -32,10 +32,11 @@ export const EditUserDialog = ({ open, selectedValue, onClose }: EditUserDialogP
   const isEditMode = !!selectedValue?.id;
 
   const { register, handleSubmit, reset, formState } = useForm<EditFormData>({
+    mode: 'all',
     defaultValues: selectedValue || { first_name: '', last_name: '', email: '' },
   });
 
-  const { isSubmitting, isDirty } = formState;
+  const { isSubmitting, isValid, errors } = formState;
 
   useEffect(() => {
     if (open) {
@@ -76,19 +77,46 @@ export const EditUserDialog = ({ open, selectedValue, onClose }: EditUserDialogP
         <DialogContent>
           <Stack spacing={2} mt={2}>
             <Box display="flex" gap={2}>
-              <TextField label="Nome" {...register('first_name')} fullWidth />
+              <TextField
+                label="Nome"
+                {...register('first_name', {
+                  required: 'Nome é obrigatório',
+                })}
+                error={!!errors.first_name}
+                helperText={errors.first_name?.message}
+                fullWidth
+                required
+              />
               <TextField label="Sobrenome" {...register('last_name')} fullWidth />
             </Box>
-            <TextField label="E-mail" type="email" {...register('email')} fullWidth />
+            <TextField
+              label="E-mail"
+              type="email"
+              {...register('email', {
+                required: 'E-mail é obrigatório',
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: 'E-mail inválido',
+                },
+              })}
+              fullWidth
+              required
+              error={!!errors.email}
+              helperText={errors.email?.message}
+              autoComplete="off"
+            />
           </Stack>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => onClose('cancel')}>Cancelar</Button>
+          <Button color="error" onClick={() => onClose('cancel')}>
+            Cancelar
+          </Button>
           <Button
             type="submit"
             variant="contained"
             loading={isSubmitting}
-            disabled={!isDirty || isSubmitting}
+            color="success"
+            disabled={!isValid || isSubmitting}
           >
             {isEditMode ? 'Salvar' : 'Criar'}
           </Button>

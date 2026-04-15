@@ -58,6 +58,11 @@ interface EditUserArg {
 
 type EditUserResult = CreateUserResult;
 
+interface DeleteUserArg {
+  project_id: string;
+  id: string;
+}
+
 export const usersApi = createApi({
   reducerPath: 'usersApi',
   baseQuery: fetchBaseQuery({
@@ -104,7 +109,7 @@ export const usersApi = createApi({
           },
           headers: {
             'x-api-key': import.meta.env.VITE_API_KEY,
-            'X-Reqres-Env': 'production',
+            'X-Reqres-Env': 'prod',
           },
         };
       },
@@ -126,13 +131,30 @@ export const usersApi = createApi({
           },
           headers: {
             'x-api-key': import.meta.env.VITE_API_KEY,
-            'X-Reqres-Env': 'production',
+            'X-Reqres-Env': 'prod',
           },
         };
       },
       invalidatesTags: ['Users'],
     }),
+    deleteUser: builder.mutation<void, DeleteUserArg>({
+      query: ({ project_id, id }) => ({
+        url: `collections/users/records/${id}`,
+        method: 'DELETE',
+        params: { project_id },
+        headers: {
+          'x-api-key': import.meta.env.VITE_API_KEY,
+          'X-Reqres-Env': 'prod',
+        },
+      }),
+      invalidatesTags: ['Users'],
+    }),
   }),
 });
 
-export const { useGetUsersQuery, useEditUserMutation, useCreateUserMutation } = usersApi;
+export const {
+  useGetUsersQuery,
+  useEditUserMutation,
+  useCreateUserMutation,
+  useDeleteUserMutation,
+} = usersApi;
