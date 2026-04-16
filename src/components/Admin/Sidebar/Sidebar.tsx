@@ -7,6 +7,11 @@ import { useDialogContext } from '@context/use-dialog-context';
 export const Sidebar = (): ReactElement => {
   const { openCreateDialog } = useDialogContext();
 
+  function handleLogout() {
+    localStorage.removeItem('token');
+    window.location.href = '/';
+  }
+
   return (
     <Box>
       <aside>
@@ -20,7 +25,7 @@ export const Sidebar = (): ReactElement => {
             </li>
 
             <li>
-              <Button type="button" variant="text">
+              <Button type="button" variant="text" onClick={() => handleLogout()}>
                 <FontAwesomeIcon icon={faSignOutAlt} size="lg" />
                 <span className="menu-item-parent">Logout</span>
               </Button>

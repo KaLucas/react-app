@@ -73,7 +73,7 @@ export const EditUserDialog = ({ open, selectedValue, onClose }: EditUserDialogP
   return (
     <Dialog open={open} onClose={() => onClose('cancel')}>
       <DialogTitle>{title}</DialogTitle>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <DialogContent>
           <Stack spacing={2} mt={2}>
             <Box display="flex" gap={2}>
@@ -103,7 +103,6 @@ export const EditUserDialog = ({ open, selectedValue, onClose }: EditUserDialogP
               required
               error={!!errors.email}
               helperText={errors.email?.message}
-              autoComplete="off"
             />
           </Stack>
         </DialogContent>

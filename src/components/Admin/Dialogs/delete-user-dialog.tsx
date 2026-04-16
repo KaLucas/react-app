@@ -29,7 +29,7 @@ export const DeleteUserDialog = ({ data, open, onClose }: DeleteUserDialogProps)
 
   return (
     <Dialog open={open} onClose={() => onClose('cancel')}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <DialogContent>
           <Alert severity="warning">
             <Typography>
