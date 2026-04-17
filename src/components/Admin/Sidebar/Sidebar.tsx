@@ -1,39 +1,54 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import { Box, Button } from '@mui/material';
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Stack,
+} from '@mui/material';
 import type { ReactElement } from 'react';
 import { useDialogContext } from '@context/use-dialog-context';
+import logo from '@assets/react-app.png';
 
 export const Sidebar = (): ReactElement => {
   const { openCreateDialog } = useDialogContext();
 
   function handleLogout() {
     localStorage.removeItem('token');
-    window.location.href = '/';
+    window.location.href = '/admin';
   }
 
   return (
-    <Box>
+    <Stack minHeight="100vh" justifyContent="space-between" sx={{ boxSizing: 'border-box', p: 2 }}>
       <aside>
         <nav>
-          <ul className="full-list">
-            <li>
-              <Button type="button" onClick={openCreateDialog} variant="text">
-                <FontAwesomeIcon icon={faPlus} size="lg" />
-                <span className="menu-item-parent">Cadastrar Novo</span>
-              </Button>
-            </li>
-
-            <li>
-              <Button type="button" variant="text" onClick={() => handleLogout()}>
-                <FontAwesomeIcon icon={faSignOutAlt} size="lg" />
-                <span className="menu-item-parent">Logout</span>
-              </Button>
-            </li>
-          </ul>
+          <List>
+            <ListItem disablePadding>
+              <ListItemButton sx={{ gap: 1 }} onClick={openCreateDialog}>
+                <ListItemIcon sx={{ minWidth: 0 }}>
+                  <FontAwesomeIcon icon={faPlus} />
+                </ListItemIcon>
+                <ListItemText primary="Cadastrar Novo" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton sx={{ gap: 1 }} onClick={handleLogout}>
+                <ListItemIcon sx={{ minWidth: 0 }}>
+                  <FontAwesomeIcon icon={faSignOutAlt} />
+                </ListItemIcon>
+                <ListItemText primary="Logout" />
+              </ListItemButton>
+            </ListItem>
+          </List>
         </nav>
       </aside>
-    </Box>
+      <Box alignSelf="center">
+        <img src={logo} alt="React App Logo" width="100px" />
+      </Box>
+    </Stack>
   );
 };
 

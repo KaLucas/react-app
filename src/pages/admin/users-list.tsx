@@ -10,6 +10,8 @@ import { formatDate } from '@utils/date';
 import { useDialogContext } from '@context/use-dialog-context';
 import { DeleteUserDialog } from '@components/admin/dialogs';
 import type { User } from '@models/user.model';
+import { useAlert } from '@hooks/alert-hook';
+import { CustomAlert } from '@components/admin/alerts/alerts';
 
 export interface DatagridUsersList {
   id: string;
@@ -28,6 +30,7 @@ const UsersList = (): ReactElement => {
     page: 0,
     pageSize: 10,
   });
+  const { open, message, type, showAlert, closeAlert } = useAlert();
 
   const {
     data: usersData,
@@ -124,14 +127,21 @@ const UsersList = (): ReactElement => {
           />
         )}
       </Box>
+      <CustomAlert open={open} message={message} type={type} onClose={closeAlert} />
       {isDialogOpen && (
-        <EditUserDialog open={isDialogOpen} onClose={closeDialog} selectedValue={selectedValue} />
+        <EditUserDialog
+          open={isDialogOpen}
+          onClose={closeDialog}
+          selectedValue={selectedValue}
+          showAlert={showAlert}
+        />
       )}
       {selectedUser && (
         <DeleteUserDialog
           data={selectedUser as User}
           open={selectedUser ? true : false}
           onClose={handleCloseDeleteDialog}
+          showAlert={showAlert}
         />
       )}
     </>

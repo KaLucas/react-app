@@ -1,19 +1,26 @@
-import { Alert, Snackbar } from '@mui/material';
+import { Snackbar, Alert } from '@mui/material';
 
-type LoginErrorAlertProps = {
+interface CustomAlertProps {
   open: boolean;
-  setOpen: (value: boolean) => void;
-};
+  message: string;
+  type: 'success' | 'error';
+  onClose: () => void;
+}
 
-export function LoginErrorAlert({ open, setOpen }: LoginErrorAlertProps) {
+export const CustomAlert = ({ open, message, type, onClose }: CustomAlertProps) => {
   return (
     <Snackbar
-      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       open={open}
       autoHideDuration={3000}
-      onClose={() => setOpen(false)}
+      onClose={(_, reason) => {
+        if (reason === 'clickaway') return;
+        onClose();
+      }}
     >
-      <Alert severity="error">Email ou senha inválidos.</Alert>
+      <Alert severity={type} sx={{ width: '300px' }}>
+        {message}
+      </Alert>
     </Snackbar>
   );
-}
+};

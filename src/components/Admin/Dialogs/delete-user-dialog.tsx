@@ -8,9 +8,15 @@ interface DeleteUserDialogProps {
   data: User;
   open: boolean;
   onClose: (value: string) => void;
+  showAlert: (message: string, type?: 'success' | 'error') => void;
 }
 
-export const DeleteUserDialog = ({ data, open, onClose }: DeleteUserDialogProps): ReactElement => {
+export const DeleteUserDialog = ({
+  data,
+  open,
+  onClose,
+  showAlert,
+}: DeleteUserDialogProps): ReactElement => {
   const { first_name, last_name } = data.data;
   const { id } = data;
   const [deleteUser] = useDeleteUserMutation();
@@ -21,9 +27,11 @@ export const DeleteUserDialog = ({ data, open, onClose }: DeleteUserDialogProps)
   const onSubmit = async () => {
     try {
       await deleteUser({ project_id: '7534', id }).unwrap();
+
+      showAlert('Usuário deletado com sucesso.', 'success');
       onClose('close');
     } catch (error) {
-      console.error('Erro ao deletar:', error);
+      showAlert('Erro ao deletar usuário.', 'error');
     }
   };
 

@@ -17,6 +17,7 @@ interface EditUserDialogProps {
   open: boolean;
   selectedValue?: DatagridUsersList;
   onClose: (value: string) => void;
+  showAlert: (message: string, type?: 'success' | 'error') => void;
 }
 
 interface EditFormData {
@@ -26,7 +27,12 @@ interface EditFormData {
   id?: string;
 }
 
-export const EditUserDialog = ({ open, selectedValue, onClose }: EditUserDialogProps) => {
+export const EditUserDialog = ({
+  open,
+  selectedValue,
+  onClose,
+  showAlert,
+}: EditUserDialogProps) => {
   const [editUser] = useEditUserMutation();
   const [createUser] = useCreateUserMutation();
   const isEditMode = !!selectedValue?.id;
@@ -62,9 +68,14 @@ export const EditUserDialog = ({ open, selectedValue, onClose }: EditUserDialogP
       } else {
         await createUser({ project_id: '7534', data: payload }).unwrap();
       }
+
+      showAlert(
+        isEditMode ? 'Usuário salvo com sucesso.' : 'Usuário criado com sucesso.',
+        'success',
+      );
       onClose('close');
     } catch (error) {
-      console.error('Erro ao salvar:', error);
+      showAlert('Erro ao salvar usuário.', 'error');
     }
   };
 

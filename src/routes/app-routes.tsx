@@ -8,13 +8,13 @@ export default function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/admin" element={<Login />} />
         <Route
-          path="/users-list"
+          path="/admin/users-list"
           element={
             <PrivateRoute>
               <Box display="flex" height="100vh">
-                <Box p={2} mt={3}>
+                <Box>
                   <Sidebar />
                 </Box>
                 <Divider orientation="vertical" flexItem />

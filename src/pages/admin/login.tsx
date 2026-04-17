@@ -1,10 +1,11 @@
 import { useAuthContext } from '@context/use-auth-context';
 import { Box, Button, Stack, TextField } from '@mui/material';
-import { useState, type ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import logo from '@assets/react-app.png';
-import { LoginErrorAlert } from '@components/admin/alerts/alerts';
+import { CustomAlert } from '@components/admin/alerts/alerts';
+import { useAlert } from '@hooks/alert-hook';
 
 type FormData = {
   email: string;
@@ -14,7 +15,7 @@ type FormData = {
 const Login = (): ReactElement => {
   const navigate = useNavigate();
   const { login } = useAuthContext();
-  const [error, setError] = useState(false);
+  const { open, message, type, showAlert, closeAlert } = useAlert();
 
   const { register, handleSubmit, formState } = useForm<FormData>();
   const { errors } = formState;
@@ -23,9 +24,9 @@ const Login = (): ReactElement => {
     const success = login(data.email, data.password);
 
     if (success) {
-      navigate('/users-list');
+      navigate('/admin/users-list');
     } else {
-      setError(true);
+      showAlert('E-mail ou senha inválidos.', 'error');
     }
   }
 
@@ -61,7 +62,7 @@ const Login = (): ReactElement => {
           </Button>
         </Stack>
       </form>
-      <LoginErrorAlert open={error} setOpen={setError} />
+      <CustomAlert open={open} message={message} type={type} onClose={closeAlert} />
     </Box>
   );
 };
