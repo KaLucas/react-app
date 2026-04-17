@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type PropsWithChildren } from 'react';
 import { AuthContext } from './auth-context';
 
 const USER = {
@@ -6,15 +6,19 @@ const USER = {
   password: '123456',
 };
 
-export function AuthProvider({ children }: any) {
-  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
+export function AuthProvider({ children }: PropsWithChildren) {
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return !!localStorage.getItem('token');
+  });
 
   function login(email: string, password: string) {
     if (email === USER.email && password === USER.password) {
       localStorage.setItem('token', 'fake-token');
       setIsAuthenticated(true);
+
       return true;
     }
+
     return false;
   }
 

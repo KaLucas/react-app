@@ -25,6 +25,7 @@
     "noUncheckedSideEffectImports": true,
 
     "paths": {
+      "@config/*": ["./src/config/*"],
       "@context/*": ["./src/context/*"],
       "@pages/*": ["./src/pages/*"],
       "@components/*": ["./src/components/*"],

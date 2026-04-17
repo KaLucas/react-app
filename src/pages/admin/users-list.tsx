@@ -6,21 +6,13 @@ import IconButton from '@mui/material/IconButton';
 import { useGetUsersQuery } from '@services/api';
 import { Box, LinearProgress, Typography } from '@mui/material';
 import { EditUserDialog } from '@components/admin';
-import { formatDate } from '@utils/date';
+import { formatDate } from '@utils/format-date';
 import { useDialogContext } from '@context/use-dialog-context';
 import { DeleteUserDialog } from '@components/admin/dialogs';
-import type { User } from '@models/user.model';
+import type { User, DatagridUsersList } from '@models/user.model';
 import { useAlert } from '@hooks/alert-hook';
-import { CustomAlert } from '@components/admin/alerts/alerts';
-
-export interface DatagridUsersList {
-  id: string;
-  email: string;
-  first_name: string;
-  last_name: string;
-  created_at: string;
-  updated_at: string;
-}
+import { CustomAlert } from '@components/admin';
+import { API_CONFIG } from '@config/api.config';
 
 const UsersList = (): ReactElement => {
   const { isOpenDialog, selectedValue, openEditDialog, openDeleteDialog, closeDialog } =
@@ -37,7 +29,7 @@ const UsersList = (): ReactElement => {
     isFetching: isFetchingUsers,
     isError: isUsersError,
   } = useGetUsersQuery({
-    project_id: '7534',
+    project_id: API_CONFIG.projectId,
     page: paginationModel.page + 1,
     limit: paginationModel.pageSize,
   });

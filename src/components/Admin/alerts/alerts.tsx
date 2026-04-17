@@ -1,4 +1,5 @@
 import { Snackbar, Alert } from '@mui/material';
+import type { ReactElement } from 'react';
 
 interface CustomAlertProps {
   open: boolean;
@@ -7,7 +8,7 @@ interface CustomAlertProps {
   onClose: () => void;
 }
 
-export const CustomAlert = ({ open, message, type, onClose }: CustomAlertProps) => {
+export const CustomAlert = ({ open, message, type, onClose }: CustomAlertProps): ReactElement => {
   return (
     <Snackbar
       anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}

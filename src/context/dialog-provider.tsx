@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from 'react';
 import { DialogContext, type DialogContextType } from './dialog-context';
-import type { DatagridUsersList } from '@pages/admin/users-list';
+import type { DatagridUsersList } from '@models/user.model';
 
 type Props = {
   children: ReactNode;

@@ -10,15 +10,19 @@ import {
   Stack,
 } from '@mui/material';
 import type { ReactElement } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDialogContext } from '@context/use-dialog-context';
+import { useAuthContext } from '@context/use-auth-context';
 import logo from '@assets/react-app.png';
 
 export const Sidebar = (): ReactElement => {
+  const navigate = useNavigate();
   const { openCreateDialog } = useDialogContext();
+  const { logout } = useAuthContext();
 
   function handleLogout() {
-    localStorage.removeItem('token');
-    window.location.href = '/admin';
+    logout();
+    navigate('/admin', { replace: true });
   }
 
   return (

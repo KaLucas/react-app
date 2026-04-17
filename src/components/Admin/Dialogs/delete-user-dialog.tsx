@@ -1,8 +1,17 @@
 import type { User } from '@models/user.model';
-import { Alert, Button, Dialog, DialogActions, DialogContent, Typography } from '@mui/material';
+import {
+  Alert,
+  Button,
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  Typography,
+} from '@mui/material';
 import { useDeleteUserMutation } from '@services/api';
 import type { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
+import { API_CONFIG } from '@config/api.config';
 
 interface DeleteUserDialogProps {
   data: User;
@@ -26,11 +35,11 @@ export const DeleteUserDialog = ({
 
   const onSubmit = async () => {
     try {
-      await deleteUser({ project_id: '7534', id }).unwrap();
+      await deleteUser({ project_id: API_CONFIG.projectId, id }).unwrap();
 
       showAlert('Usuário deletado com sucesso.', 'success');
       onClose('close');
-    } catch (error) {
+    } catch {
       showAlert('Erro ao deletar usuário.', 'error');
     }
   };
@@ -57,10 +66,10 @@ export const DeleteUserDialog = ({
             type="submit"
             variant="contained"
             color="success"
-            loading={isSubmitting}
             disabled={isSubmitting}
+            startIcon={isSubmitting ? <CircularProgress size={20} /> : undefined}
           >
-            Confirmar
+            {isSubmitting ? 'Deletando...' : 'Confirmar'}
           </Button>
         </DialogActions>
       </form>

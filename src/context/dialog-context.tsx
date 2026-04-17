@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import type { DatagridUsersList } from '@pages/admin/users-list';
+import type { DatagridUsersList } from '@models/user.model';
 
 export interface DialogContextType {
   isOpenDialog: 'edit' | 'delete' | 'create' | null;

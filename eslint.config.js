@@ -34,6 +34,10 @@ export default defineConfig([
         { blankLine: 'always', prev: '*', next: 'return' },
       ],
       'react/react-in-jsx-scope': 'off',
+      '@typescript-eslint/no-explicit-any': 'error',
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
+      'react-hooks/exhaustive-deps': 'warn',
+      'react-hooks/rules-of-hooks': 'error',
     },
     settings: {
       react: { version: 'detect' },

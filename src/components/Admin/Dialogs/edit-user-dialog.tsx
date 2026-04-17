@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import {
   Box,
   Button,
+  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
@@ -10,8 +11,10 @@ import {
   Stack,
   TextField,
 } from '@mui/material';
-import type { DatagridUsersList } from '@pages/admin/users-list';
+import type { DatagridUsersList } from '@models/user.model';
 import { useEditUserMutation, useCreateUserMutation } from '@services/api';
+import { API_CONFIG } from '@config/api.config';
+import { validateEmail } from '@utils/validation';
 
 interface EditUserDialogProps {
   open: boolean;
@@ -64,9 +67,9 @@ export const EditUserDialog = ({
       };
 
       if (isEditMode) {
-        await editUser({ project_id: '7534', data: payload }).unwrap();
+        await editUser({ project_id: API_CONFIG.projectId, data: payload }).unwrap();
       } else {
-        await createUser({ project_id: '7534', data: payload }).unwrap();
+        await createUser({ project_id: API_CONFIG.projectId, data: payload }).unwrap();
       }
 
       showAlert(
@@ -74,7 +77,7 @@ export const EditUserDialog = ({
         'success',
       );
       onClose('close');
-    } catch (error) {
+    } catch {
       showAlert('Erro ao salvar usuário.', 'error');
     }
   };
@@ -105,10 +108,7 @@ export const EditUserDialog = ({
               type="email"
               {...register('email', {
                 required: 'E-mail é obrigatório',
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: 'E-mail inválido',
-                },
+                validate: (value) => validateEmail(value) || 'E-mail inválido',
               })}
               fullWidth
               required
@@ -124,11 +124,11 @@ export const EditUserDialog = ({
           <Button
             type="submit"
             variant="contained"
-            loading={isSubmitting}
             color="success"
             disabled={!isValid || isSubmitting}
+            startIcon={isSubmitting ? <CircularProgress size={20} /> : undefined}
           >
-            {isEditMode ? 'Salvar' : 'Criar'}
+            {isSubmitting ? 'Salvando...' : isEditMode ? 'Salvar' : 'Criar'}
           </Button>
         </DialogActions>
       </form>

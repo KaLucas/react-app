@@ -1,9 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { User } from '@models/user.model';
+import { API_CONFIG, createApiHeaders } from '@config/api.config';
 
 interface GetUsersResult {
   data: Array<User>;
   total: number;
+  page: number;
+  perPage: number;
 }
 interface GetUsersResponse {
   data: Array<User>;
@@ -66,7 +69,7 @@ interface DeleteUserArg {
 export const usersApi = createApi({
   reducerPath: 'usersApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://reqres.in/api/',
+    baseUrl: API_CONFIG.baseUrl,
   }),
   tagTypes: ['Users'],
   endpoints: (builder) => ({
@@ -78,10 +81,7 @@ export const usersApi = createApi({
           page,
           limit,
         },
-        headers: {
-          'x-api-key': import.meta.env.VITE_API_KEY,
-          'X-Reqres-Env': 'production',
-        },
+        headers: createApiHeaders(),
       }),
       providesTags: ['Users'],
       transformResponse: (response: GetUsersResponse) => {
@@ -96,6 +96,7 @@ export const usersApi = createApi({
     createUser: builder.mutation<CreateUserResult, CreateUserArg>({
       query: ({ project_id, data }) => {
         const { firstName, lastName, email } = data;
+
         return {
           url: `collections/users/records`,
           method: 'POST',
@@ -107,10 +108,7 @@ export const usersApi = createApi({
               email,
             },
           },
-          headers: {
-            'x-api-key': import.meta.env.VITE_API_KEY,
-            'X-Reqres-Env': 'prod',
-          },
+          headers: createApiHeaders(),
         };
       },
       invalidatesTags: ['Users'],
@@ -118,6 +116,7 @@ export const usersApi = createApi({
     editUser: builder.mutation<EditUserResult, EditUserArg>({
       query: ({ project_id, data }) => {
         const { firstName, lastName, email, id } = data;
+
         return {
           url: `collections/users/records/${id}`,
           method: 'PUT',
@@ -129,10 +128,7 @@ export const usersApi = createApi({
               email,
             },
           },
-          headers: {
-            'x-api-key': import.meta.env.VITE_API_KEY,
-            'X-Reqres-Env': 'prod',
-          },
+          headers: createApiHeaders(),
         };
       },
       invalidatesTags: ['Users'],
@@ -142,10 +138,7 @@ export const usersApi = createApi({
         url: `collections/users/records/${id}`,
         method: 'DELETE',
         params: { project_id },
-        headers: {
-          'x-api-key': import.meta.env.VITE_API_KEY,
-          'X-Reqres-Env': 'prod',
-        },
+        headers: createApiHeaders(),
       }),
       invalidatesTags: ['Users'],
     }),

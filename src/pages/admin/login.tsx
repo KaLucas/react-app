@@ -4,8 +4,9 @@ import { type ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import logo from '@assets/react-app.png';
-import { CustomAlert } from '@components/admin/alerts/alerts';
+import { CustomAlert } from '@components/admin';
 import { useAlert } from '@hooks/alert-hook';
+import { validateEmail } from '@utils/validation';
 
 type FormData = {
   email: string;
@@ -40,10 +41,7 @@ const Login = (): ReactElement => {
             type="email"
             {...register('email', {
               required: 'E-mail é obrigatório',
-              pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: 'E-mail inválido',
-              },
+              validate: (value) => validateEmail(value) || 'E-mail inválido',
             })}
             error={!!errors.email}
             helperText={errors.email?.message}
