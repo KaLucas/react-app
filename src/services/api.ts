@@ -19,8 +19,8 @@ interface GetUsersResponse {
 }
 interface GetUsersArg {
   project_id: string;
-  page: number;
-  limit: number;
+  page?: number;
+  limit?: number;
 }
 
 interface CreateUserArg {

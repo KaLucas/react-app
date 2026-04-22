@@ -3,11 +3,18 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PrivateRoute from './private-route';
 import { Sidebar } from '@components/admin';
 import { Box, Divider } from '@mui/material';
+import { UsersShow } from '@pages/main';
 
-export default function AppRoutes() {
+type Props = {
+  toggleTheme: () => void;
+  mode: 'light' | 'dark';
+};
+
+export default function AppRoutes({ toggleTheme, mode }: Props) {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<UsersShow toggleTheme={toggleTheme} mode={mode} />} />
         <Route path="/admin" element={<Login />} />
         <Route
           path="/admin/users-list"
