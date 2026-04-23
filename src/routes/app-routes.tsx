@@ -5,12 +5,12 @@ import { Sidebar } from '@components/admin';
 import { Box, Divider } from '@mui/material';
 import { UsersShow } from '@pages/main';
 
-type Props = {
+export type modeProps = {
   toggleTheme: () => void;
   mode: 'light' | 'dark';
 };
 
-export default function AppRoutes({ toggleTheme, mode }: Props) {
+export default function AppRoutes({ toggleTheme, mode }: modeProps) {
   return (
     <BrowserRouter>
       <Routes>

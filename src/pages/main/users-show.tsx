@@ -3,12 +3,9 @@ import { API_CONFIG } from '@config/api.config';
 import { Box, Typography, Container, Grid, Card, CardContent } from '@mui/material';
 import { useGetUsersQuery } from '@services/api';
 import type { ReactElement } from 'react';
+import type { modeProps } from '@routes/app-routes';
 
-type Props = {
-  toggleTheme: () => void;
-  mode: 'light' | 'dark';
-};
-const UsersShow = ({ toggleTheme, mode }: Props): ReactElement => {
+const UsersShow = ({ toggleTheme, mode }: modeProps): ReactElement => {
   const {
     data: usersData,
     isFetching: isFetchingUsers,
