@@ -9,6 +9,7 @@ export const Header = ({ toggleTheme, mode }: modeProps): ReactElement => {
   const navigate = useNavigate();
 
   const handleClick = () => navigate('/admin');
+
   return (
     <AppBar
       position="fixed"

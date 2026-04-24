@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, type SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 import {
   Box,
@@ -15,11 +15,12 @@ import type { DatagridUsersList } from '@models/user.model';
 import { useEditUserMutation, useCreateUserMutation } from '@services/api';
 import { API_CONFIG } from '@config/api.config';
 import { validateEmail } from '@utils/validation';
+import type { DialogType } from '@pages/admin/users-list';
 
 interface EditUserDialogProps {
   open: boolean;
   selectedValue?: DatagridUsersList;
-  onClose: (value: string) => void;
+  onClose: (value: SetStateAction<DialogType>) => void;
   showAlert: (message: string, type?: 'success' | 'error') => void;
 }
 
@@ -38,7 +39,7 @@ export const EditUserDialog = ({
 }: EditUserDialogProps) => {
   const [editUser] = useEditUserMutation();
   const [createUser] = useCreateUserMutation();
-  const isEditMode = !!selectedValue?.id;
+  const isEditMode = !!selectedValue;
 
   const { register, handleSubmit, reset, formState } = useForm<EditFormData>({
     mode: 'all',
@@ -76,7 +77,7 @@ export const EditUserDialog = ({
         isEditMode ? 'Usuário salvo com sucesso.' : 'Usuário criado com sucesso.',
         'success',
       );
-      onClose('close');
+      onClose('none');
     } catch {
       showAlert('Erro ao salvar usuário.', 'error');
     }
@@ -85,7 +86,7 @@ export const EditUserDialog = ({
   const title = isEditMode ? 'Editar dados' : 'Cadastrar novo usuário';
 
   return (
-    <Dialog open={open} onClose={() => onClose('cancel')}>
+    <Dialog open={open} onClose={() => onClose('none')}>
       <DialogTitle>{title}</DialogTitle>
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <DialogContent>
@@ -118,7 +119,7 @@ export const EditUserDialog = ({
           </Stack>
         </DialogContent>
         <DialogActions>
-          <Button color="error" onClick={() => onClose('cancel')}>
+          <Button color="error" onClick={() => onClose('none')}>
             Cancelar
           </Button>
           <Button

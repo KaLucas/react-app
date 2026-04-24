@@ -1,4 +1,4 @@
-import type { User } from '@models/user.model';
+import type { DatagridUsersList } from '@models/user.model';
 import {
   Alert,
   Button,
@@ -9,26 +9,28 @@ import {
   Typography,
 } from '@mui/material';
 import { useDeleteUserMutation } from '@services/api';
-import type { ReactElement } from 'react';
+import type { ReactElement, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 import { API_CONFIG } from '@config/api.config';
+import type { DialogType } from '@pages/admin/users-list';
 
 interface DeleteUserDialogProps {
-  data: User;
+  selectedValue: DatagridUsersList;
   open: boolean;
-  onClose: (value: string) => void;
+  onClose: (value: SetStateAction<DialogType>) => void;
   showAlert: (message: string, type?: 'success' | 'error') => void;
 }
 
 export const DeleteUserDialog = ({
-  data,
+  selectedValue,
   open,
   onClose,
   showAlert,
 }: DeleteUserDialogProps): ReactElement => {
-  const { first_name, last_name } = data.data;
-  const { id } = data;
+  const { first_name, last_name, id } = selectedValue;
   const [deleteUser] = useDeleteUserMutation();
+
+  console.log('selectedValue', selectedValue);
 
   const { handleSubmit, formState } = useForm({ mode: 'all' });
   const { isSubmitting } = formState;
@@ -38,14 +40,14 @@ export const DeleteUserDialog = ({
       await deleteUser({ project_id: API_CONFIG.projectId, id }).unwrap();
 
       showAlert('Usuário deletado com sucesso.', 'success');
-      onClose('close');
+      onClose('none');
     } catch {
       showAlert('Erro ao deletar usuário.', 'error');
     }
   };
 
   return (
-    <Dialog open={open} onClose={() => onClose('cancel')}>
+    <Dialog open={open} onClose={() => onClose('none')}>
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <DialogContent>
           <Alert severity="warning">
@@ -59,7 +61,7 @@ export const DeleteUserDialog = ({
           </Alert>
         </DialogContent>
         <DialogActions>
-          <Button color="error" onClick={() => onClose('cancel')}>
+          <Button color="error" onClick={() => onClose('none')}>
             Cancelar
           </Button>
           <Button

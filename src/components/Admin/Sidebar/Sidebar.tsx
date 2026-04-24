@@ -11,13 +11,11 @@ import {
 } from '@mui/material';
 import type { ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDialogContext } from '@context/use-dialog-context';
 import { useAuthContext } from '@context/use-auth-context';
 import logo from '@assets/react-app.png';
 
 export const Sidebar = (): ReactElement => {
   const navigate = useNavigate();
-  const { openCreateDialog } = useDialogContext();
   const { logout } = useAuthContext();
 
   function handleLogout() {
@@ -30,14 +28,6 @@ export const Sidebar = (): ReactElement => {
       <aside>
         <nav>
           <List>
-            <ListItem disablePadding>
-              <ListItemButton sx={{ gap: 1 }} onClick={openCreateDialog}>
-                <ListItemIcon sx={{ minWidth: 0 }}>
-                  <FontAwesomeIcon icon={faPlus} />
-                </ListItemIcon>
-                <ListItemText primary="Cadastrar Novo" />
-              </ListItemButton>
-            </ListItem>
             <ListItem disablePadding>
               <ListItemButton sx={{ gap: 1 }} onClick={handleLogout}>
                 <ListItemIcon sx={{ minWidth: 0 }}>

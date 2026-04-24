@@ -34,7 +34,9 @@
       "@utils/*": ["./src/utils/*"],
       "@assets/*": ["./src/assets/*"],
       "@hooks/*": ["./src/hooks/*"],
-      "@routes/*": ["./src/routes/*"]
+      "@routes/*": ["./src/routes/*"],
+      "@theme/*": ["./src/theme/*"],
+      "@layouts/*": ["./src/layouts/*"]
     }
   },
   "include": ["src"]

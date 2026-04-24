@@ -17,7 +17,6 @@ const UsersShow = ({ toggleTheme, mode }: modeProps): ReactElement => {
   return (
     <Box
       sx={{
-        minHeight: '100vh',
         position: 'relative',
         top: '64px',
       }}
