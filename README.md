@@ -156,9 +156,11 @@ react-app/
 
 ## 📬 Contato
 
-**Karina Lucas** — [GitHub](https://github.com/KaLucas)
+**Karina Lucas**
 
-Link do projeto: [https://github.com/KaLucas/react-app](https://github.com/KaLucas/react-app)
+- 📧 [karina.lucas@gmail.com](mailto:karina.lucas@gmail.com)
+- 💼 [LinkedIn](https://www.linkedin.com/in/karinalucas/)
+- 🐙 [GitHub](https://github.com/KaLucas)
 
 ---
 
