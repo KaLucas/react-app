@@ -6,14 +6,14 @@
 
 ## 📋 Índice
 
-- [Sobre o Projeto](#sobre-o-projeto)
-- [Tecnologias](#tecnologias)
-- [Pré-requisitos](#pré-requisitos)
-- [Instalação](#instalação)
-- [Como Usar](#como-usar)
-- [Estrutura de Pastas](#estrutura-de-pastas)
-- [Scripts Disponíveis](#scripts-disponíveis)
-- [Contato](#contato)
+- [Sobre o Projeto](#-sobre-o-projeto)
+- [Tecnologias](#-tecnologias)
+- [Pré-requisitos](#-pré-requisitos)
+- [Instalação](#-instalação)
+- [Como Usar](#️-como-usar)
+- [Estrutura de Pastas](#-estrutura-de-pastas)
+- [Scripts Disponíveis](#-scripts-disponíveis)
+- [Contato](#-contato)
 
 ---
 
@@ -161,7 +161,3 @@ react-app/
 - 📧 [karina.lucas@gmail.com](mailto:karina.lucas@gmail.com)
 - 💼 [LinkedIn](https://www.linkedin.com/in/karinalucas/)
 - 🐙 [GitHub](https://github.com/KaLucas)
-
----
-
-<p align="center">Feito com ❤️ por <a href="https://github.com/KaLucas">KaLucas</a></p>
