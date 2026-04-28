@@ -33,6 +33,7 @@ export const Header = ({ toggleTheme, mode }: modeProps): ReactElement => {
             <FontAwesomeIcon icon={mode === 'light' ? faMoon : faSun} />
           </Button>
           <Button
+            data-test="redirect-button-admin"
             variant="contained"
             sx={(theme) => ({
               borderRadius: '200px',

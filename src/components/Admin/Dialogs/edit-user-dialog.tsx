@@ -79,11 +79,11 @@ export const EditUserDialog = ({
       );
       onClose('none');
     } catch {
-      showAlert('Erro ao salvar usuário.', 'error');
+      showAlert(isEditMode ? 'Erro ao salvar usuário.' : 'Erro ao criar novo usuário.', 'error');
     }
   };
 
-  const title = isEditMode ? 'Editar dados' : 'Cadastrar novo usuário';
+  const title = isEditMode ? 'Editar usuário' : 'Cadastrar novo usuário';
 
   return (
     <Dialog open={open} onClose={() => onClose('none')}>

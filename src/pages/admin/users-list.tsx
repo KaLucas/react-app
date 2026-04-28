@@ -70,6 +70,7 @@ const UsersList = (): ReactElement => {
       renderCell: (params) => (
         <div>
           <IconButton
+            data-test="edit-user"
             onClick={() => {
               setIsOpenDialog('edit');
               setSelectedUser(params.row);
@@ -78,6 +79,7 @@ const UsersList = (): ReactElement => {
             <EditIcon />
           </IconButton>
           <IconButton
+            data-test="delete-user"
             onClick={() => {
               setIsOpenDialog('delete');
               setSelectedUser(params.row);
@@ -104,6 +106,7 @@ const UsersList = (): ReactElement => {
         <Box display="flex" flexDirection="row" justifyContent="space-between" alignItems="center">
           <h2>Lista de Usuários</h2>
           <Button
+            data-test="create-user"
             variant="contained"
             startIcon={<FontAwesomeIcon icon={faPlus} />}
             size="small"
@@ -122,24 +125,26 @@ const UsersList = (): ReactElement => {
         {isUsersError ? (
           <Typography>Erro ao carregar usuários</Typography>
         ) : (
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            paginationMode="server"
-            rowCount={usersData?.total ?? 0}
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
-            pageSizeOptions={[5, 10, 25, 50]}
-            disableRowSelectionOnClick
-            localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
-            sx={{
-              '& .MuiDataGrid-cell': {
-                display: 'flex',
-                alignItems: 'center',
-              },
-              opacity: isFetchingUsers ? 0.5 : 1,
-            }}
-          />
+          <Box data-test="users-list-result">
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              paginationMode="server"
+              rowCount={usersData?.total ?? 0}
+              paginationModel={paginationModel}
+              onPaginationModelChange={setPaginationModel}
+              pageSizeOptions={[5, 10, 25, 50]}
+              disableRowSelectionOnClick
+              localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
+              sx={{
+                '& .MuiDataGrid-cell': {
+                  display: 'flex',
+                  alignItems: 'center',
+                },
+                opacity: isFetchingUsers ? 0.5 : 1,
+              }}
+            />
+          </Box>
         )}
       </Box>
       <CustomAlert open={open} message={message} type={type} onClose={closeAlert} />

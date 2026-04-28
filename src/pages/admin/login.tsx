@@ -37,6 +37,7 @@ const Login = (): ReactElement => {
     <Box display="flex" flexDirection="column" minHeight="100vh" sx={{ boxSizing: 'border-box' }}>
       <Box display="flex" justifyContent="flex-end" pt={3} pr={3}>
         <Button
+          data-test="redirect-button-list"
           variant="contained"
           sx={(theme) => ({
             borderRadius: '200px',
@@ -57,6 +58,7 @@ const Login = (): ReactElement => {
           <Stack spacing={2} width="300px">
             <img src={logo} alt="React App Logo" />
             <TextField
+              data-test="email"
               label="E-mail"
               type="email"
               {...register('email', {
@@ -68,6 +70,7 @@ const Login = (): ReactElement => {
               required
             />
             <TextField
+              data-test="password"
               label="Senha"
               type="password"
               {...register('password', { required: 'Senha é obrigatório' })}
@@ -75,7 +78,7 @@ const Login = (): ReactElement => {
               error={!!errors.password}
               helperText={errors.password?.message}
             />
-            <Button type="submit" variant="contained">
+            <Button data-test="login-button" type="submit" variant="contained">
               Login
             </Button>
           </Stack>
