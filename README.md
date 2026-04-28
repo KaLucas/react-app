@@ -11,6 +11,7 @@
 - [Pré-requisitos](#-pré-requisitos)
 - [Instalação](#-instalação)
 - [Como Usar](#️-como-usar)
+- [Testes](#-testes)
 - [Estrutura de Pastas](#-estrutura-de-pastas)
 - [Scripts Disponíveis](#-scripts-disponíveis)
 - [Contato](#-contato)
@@ -21,7 +22,7 @@
 
 **React App** é um sistema de administração web moderno, construído com React e TypeScript. A aplicação oferece uma interface intuitiva para gerenciamento de dados, utilizando componentes ricos do Material UI, gerenciamento de estado com Redux Toolkit e navegação entre páginas com React Router.
 
-> ⚠️ **Nota:** Este projeto faz parte do meu portfólio pessoal e tem como objetivo demonstrar organização de código, boas práticas e domínio das tecnologias utilizadas. Ele representa o básico do que sei fazer — e está longe de ser o limite do meu conhecimento.
+> ⚠️ **Nota:** Este projeto faz parte do meu portfólio pessoal e tem como objetivo demonstrar organização de código, boas práticas e domínio das tecnologias utilizadas. Ele representa o básico do que sei fazer e está longe de ser o limite do meu conhecimento.
 
 ---
 
@@ -117,21 +118,59 @@ npm run preview
 
 ---
 
+## 🧪 Testes
+
+O projeto conta com testes **E2E (end-to-end)** utilizando **[Cypress](https://www.cypress.io/)**, cobrindo os principais fluxos da aplicação.
+
+### Executando os testes
+
+Abrindo a interface visual do Cypress:
+
+```bash
+npx cypress open
+```
+
+Executando em modo headless (terminal):
+
+```bash
+npx cypress run
+```
+
+---
+
 ## 📁 Estrutura de Pastas
 
 ```
 react-app/
+├── cypress/
+│   ├── e2e/                 # Testes end-to-end
+│   │   ├── auth/
+│   │   ├── routes/
+│   │   └── users/
+│   └── fixtures/            # Dados mockados para os testes
+│   └── support/             # Configurações e comandos
 ├── public/                  # Arquivos estáticos públicos
 ├── src/
-│   ├── components/          # Componentes reutilizáveis
-│   ├── pages/               # Páginas da aplicação (rotas)
-│   ├── store/               # Configuração do Redux (slices, store)
-│   ├── hooks/               # Custom hooks
-│   ├── types/               # Definições de tipos TypeScript
 │   ├── assets/              # Imagens e recursos estáticos
-│   ├── App.tsx              # Componente raiz e configuração de rotas
-│   └── main.tsx             # Ponto de entrada da aplicação
+│   ├── components/          # Componentes reutilizáveis
+│   ├── config/              # Configurações da aplicação
+│   ├── context/             # Contexts da aplicação (React Context API)
+│   ├── hooks/               # Custom hooks
+│   ├── layouts/             # Layouts compartilhados entre páginas
+│   ├── models/              # Tipagens e interfaces de domínio
+│   ├── pages/               # Páginas da aplicação (rotas)
+│   ├── routes/              # Configuração de rotas e rotas protegidas
+│   ├── services/            # Chamadas a APIs e serviços externos
+│   ├── theme/               # Configuração de tema do MUI
+│   ├── utils/               # Funções utilitárias
+│   ├── app.css
+│   ├── app.tsx              # Componente raiz
+│   ├── index.css
+│   ├── main.tsx             # Ponto de entrada da aplicação
+│   ├── store.ts             # Configuração do Redux store
+│   └── vite-env.d.ts
 ├── index.html
+├── cypress.config.ts
 ├── vite.config.ts
 ├── tsconfig.json
 ├── tsconfig.app.json
@@ -145,12 +184,14 @@ react-app/
 
 ## 📜 Scripts Disponíveis
 
-| Comando           | Descrição                                          |
-| ----------------- | -------------------------------------------------- |
-| `npm run dev`     | Inicia o servidor de desenvolvimento na porta 5173 |
-| `npm run build`   | Compila o TypeScript e gera o build de produção    |
-| `npm run preview` | Pré-visualiza o build de produção localmente       |
-| `npm run lint`    | Executa o ESLint para análise estática do código   |
+| Comando            | Descrição                                          |
+| ------------------ | -------------------------------------------------- |
+| `npm run dev`      | Inicia o servidor de desenvolvimento na porta 5173 |
+| `npm run build`    | Compila o TypeScript e gera o build de produção    |
+| `npm run preview`  | Pré-visualiza o build de produção localmente       |
+| `npm run lint`     | Executa o ESLint para análise estática do código   |
+| `npx cypress open` | Abre a interface visual do Cypress                 |
+| `npx cypress run`  | Executa os testes E2E em modo headless             |
 
 ---
 
