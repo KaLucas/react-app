@@ -150,6 +150,7 @@ react-app/
 │   ├── e2e/                 # Testes end-to-end
 │   │   ├── auth/
 │   │   ├── routes/
+│   │   ├── sidebar/
 │   │   └── users/
 │   └── fixtures/            # Dados mockados para os testes
 │   └── support/             # Configurações e comandos
