@@ -23,7 +23,9 @@
     "erasableSyntaxOnly": false,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
     "paths": {
       "@config/*": ["./src/config/*"],
       "@context/*": ["./src/context/*"],

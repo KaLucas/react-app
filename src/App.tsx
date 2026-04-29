@@ -1,4 +1,4 @@
-import './app.css';
+import './App.css';
 import { useState } from 'react';
 
 import { AuthProvider } from '@context/auth-provider';
