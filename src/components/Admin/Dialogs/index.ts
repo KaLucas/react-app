@@ -1,2 +1,2 @@
-export { EditUserDialog } from './edit-user-dialog';
-export { DeleteUserDialog } from './delete-user-dialog';
+export { default as EditUserDialog } from './edit-user-dialog';
+export { default as DeleteUserDialog } from './delete-user-dialog';

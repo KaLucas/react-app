@@ -7,7 +7,7 @@ import { useGetUsersQuery } from '@services/api';
 import { Box, Button, LinearProgress, Typography } from '@mui/material';
 import { EditUserDialog } from '@components/admin';
 import { formatDate } from '@utils/format-date';
-import { DeleteUserDialog } from '@components/admin/dialogs';
+import { DeleteUserDialog } from '@components/admin';
 import type { DatagridUsersList } from '@models/user.model';
 import { useAlert } from '@hooks/alert-hook';
 import { CustomAlert } from '@components/admin';
