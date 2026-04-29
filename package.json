@@ -11,7 +11,7 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "e2e": "start-server-and-test dev http://localhost:5173 cy:open",
-    "e2e:run": "start-server-and-test dev http://localhost:5173 cy:run"
+    "e2e:run": "cypress run"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
