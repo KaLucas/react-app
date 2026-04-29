@@ -4,7 +4,7 @@ import { type ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import logo from '@assets/react-app.png';
-import { CustomAlert } from '@components/admin';
+import { CustomAlert } from '@components/admin/index';
 import { useAlert } from '@hooks/alert-hook';
 import { validateEmail } from '@utils/validation';
 

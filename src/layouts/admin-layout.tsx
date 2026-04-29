@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import { Sidebar } from '@components/admin';
+import { Sidebar } from '@components/admin/index';
 import { Box, Divider } from '@mui/material';
 import { UsersList } from '@pages/admin';
 
