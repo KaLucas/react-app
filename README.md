@@ -2,6 +2,8 @@
 
 > Sistema de administração desenvolvido com React, TypeScript e Material UI.
 
+![E2E Tests](https://github.com/KaLucas/react-app/actions/workflows/e2e.yml/badge.svg)
+
 ---
 
 ## 📋 Índice
@@ -121,6 +123,8 @@ npm run preview
 ## 🧪 Testes
 
 O projeto conta com testes **E2E (end-to-end)** utilizando **[Cypress](https://www.cypress.io/)**, cobrindo os principais fluxos da aplicação.
+
+Os testes são executados automaticamente via **[GitHub Actions](https://github.com/KaLucas/react-app/actions/workflows/e2e.yml)** a cada push ou pull request na branch `master`, garantindo que nenhuma alteração quebre os fluxos existentes.
 
 ### Executando os testes
 
