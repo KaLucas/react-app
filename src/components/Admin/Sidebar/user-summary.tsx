@@ -11,6 +11,7 @@ type UserSummaryProps = {
 const UserSummary = ({ total, createdAt }: UserSummaryProps): ReactElement => {
   return (
     <Card
+      data-test="user-summary-card"
       elevation={0}
       sx={{
         border: '1px solid #eee',
@@ -25,7 +26,7 @@ const UserSummary = ({ total, createdAt }: UserSummaryProps): ReactElement => {
             Total de usuários
           </Typography>
         </Box>
-        <Typography variant="h4" fontWeight={600}>
+        <Typography data-test="sidebar-count" variant="h4" fontWeight={600}>
           {total}
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>

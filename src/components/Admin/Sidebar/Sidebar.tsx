@@ -35,12 +35,17 @@ export const Sidebar = (): ReactElement => {
   const createdAt = usersData?.data?.[0]?.created_at as User['created_at'];
 
   return (
-    <Stack minHeight="100vh" justifyContent="space-between" sx={{ boxSizing: 'border-box' }}>
+    <Stack
+      data-test="sidebar"
+      minHeight="100vh"
+      justifyContent="space-between"
+      sx={{ boxSizing: 'border-box' }}
+    >
       <List sx={{ display: 'flex', flexDirection: 'column', flex: 1, p: 2 }}>
         <ListItem disablePadding>
           <UserSummary total={total} createdAt={createdAt} />
         </ListItem>
-        <ListItem disablePadding sx={{ mt: 'auto' }}>
+        <ListItem disablePadding sx={{ mt: 'auto' }} data-test="logout-button">
           <ListItemButton sx={{ gap: 1 }} onClick={handleLogout}>
             <ListItemIcon sx={{ minWidth: 0 }}>
               <FontAwesomeIcon icon={faSignOutAlt} />

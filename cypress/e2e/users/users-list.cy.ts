@@ -31,7 +31,7 @@ describe('Users List', () => {
 
   it('Should change to page 2 and list users', () => {
     cy.intercept('GET', '**/collections/users/records*', {
-      fixture: 'users-list2.json',
+      fixture: 'users-list-page-2.json',
     }).as('get-users-list2');
 
     cy.get('[data-test=users-list-result] > .MuiDataGrid-root').should(
