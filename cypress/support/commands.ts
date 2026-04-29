@@ -10,11 +10,20 @@ declare global {
 }
 
 Cypress.Commands.add('login', () => {
-  cy.session('user-session', () => {
-    cy.window().then((win) => {
-      win.localStorage.setItem('token', 'fake-token');
-    });
-  });
+  cy.session(
+    'user-session',
+    () => {
+      cy.visit('/admin');
+      cy.window().then((win) => {
+        win.localStorage.setItem('token', 'fake-token');
+      });
+    },
+    {
+      validate() {
+        cy.wrap(localStorage.getItem('token')).should('eq', 'fake-token');
+      },
+    },
+  );
 });
 
 Cypress.Commands.add('logout', () => {
