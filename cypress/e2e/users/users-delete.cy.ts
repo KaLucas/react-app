@@ -17,6 +17,11 @@ describe('Users Delete', () => {
       fixture: 'users-list-user-delete.json',
     }).as('get-users-list-user-delete');
 
+    cy.get('div[role=rowgroup] > [data-rowindex=0] > [data-field=first_name]').should(
+      'contain.text',
+      'Novo',
+    );
+
     cy.get('div[role=rowgroup] > [data-rowindex=0]').within(() => {
       cy.get('[data-test=delete-user]').click();
     });
