@@ -94,6 +94,17 @@ npm install
 
 ---
 
+## 🔑 Acesso
+
+Para acessar o sistema, utilize as credenciais abaixo:
+
+| Campo  | Valor             |
+| ------ | ----------------- |
+| E-mail | `admin@email.com` |
+| Senha  | `123456`          |
+
+---
+
 ## ▶️ Como Usar
 
 ### Iniciando o servidor de desenvolvimento
