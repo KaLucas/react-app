@@ -1,7 +1,6 @@
 describe('Sidebar', () => {
   beforeEach(() => {
     cy.login();
-    cy.visit('/admin/users-list');
   });
 
   it('Should display sidebar data', () => {

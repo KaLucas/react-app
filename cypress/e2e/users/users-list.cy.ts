@@ -1,12 +1,11 @@
 describe('Users List', () => {
   beforeEach(() => {
-    cy.login();
-
     cy.intercept('GET', '**/collections/users/records*', {
       fixture: 'users-list.json',
     }).as('get-users-list');
 
-    cy.visit('/admin/users-list');
+    cy.login();
+
     cy.wait('@get-users-list');
   });
 

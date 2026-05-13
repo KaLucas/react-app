@@ -2,7 +2,7 @@ describe('Routes', () => {
   context('Private Routes', () => {
     it('Should redirect to home if not logged in', () => {
       cy.logout();
-      cy.visit('/admin/users-list');
+      cy.visit('/admin/dashboard');
 
       cy.url().should('include', '/admin');
       cy.get('form').should('be.visible');
@@ -10,7 +10,7 @@ describe('Routes', () => {
 
     it('Should allow access if logged in', () => {
       cy.login();
-      cy.visit('/admin/users-list');
+      cy.visit('/admin/dashboard');
 
       cy.get('h2').contains('Lista de Usuários').should('be.visible');
     });

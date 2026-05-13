@@ -16,7 +16,7 @@ export default function AppRoutes({ toggleTheme, mode }: modeProps) {
         <Route path="/" element={<MainLayout toggleTheme={toggleTheme} mode={mode} />} />
         <Route path="/admin" element={<Login />} />
         <Route
-          path="/admin/users-list"
+          path="/admin/dashboard"
           element={
             <PrivateRoute>
               <AdminLayout />

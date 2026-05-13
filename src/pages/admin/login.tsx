@@ -27,7 +27,7 @@ const Login = (): ReactElement => {
     const success = login(data.email, data.password);
 
     if (success) {
-      navigate('/admin/users-list');
+      navigate('/admin/dashboard');
     } else {
       showAlert('E-mail ou senha inválidos.', 'error');
     }

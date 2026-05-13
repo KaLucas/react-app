@@ -1,12 +1,11 @@
 describe('Users sync with sidebar', () => {
   beforeEach(() => {
-    cy.login();
-
     cy.intercept('GET', '**/collections/users/records*', {
       fixture: 'users-list.json',
     }).as('get-users');
 
-    cy.visit('/admin/users-list');
+    cy.login();
+
     cy.wait('@get-users');
   });
 
@@ -47,7 +46,7 @@ describe('Users sync with sidebar', () => {
 
     cy.intercept('GET', '**/collections/users/records*', {
       fixture: 'users-list-user-delete.json',
-    }).as('get-users-created');
+    }).as('get-users-delete');
 
     cy.get('div[role=rowgroup] > [data-rowindex=0]').within(() => {
       cy.get('[data-test=delete-user]').click();

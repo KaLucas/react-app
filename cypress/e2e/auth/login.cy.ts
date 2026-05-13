@@ -6,7 +6,7 @@ describe('Login', () => {
     cy.get('[data-test=password]').type('123456');
     cy.get('[data-test=login-button]').click();
 
-    cy.url().should('include', '/admin/users-list');
+    cy.url().should('include', '/admin/dashboard');
     cy.get('h2').contains('Lista de Usuários').should('be.visible');
   });
 

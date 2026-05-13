@@ -10,7 +10,7 @@ declare global {
 }
 
 Cypress.Commands.add('login', () => {
-  cy.visit('/admin/users-list', {
+  cy.visit('/admin/dashboard', {
     onBeforeLoad(win) {
       win.localStorage.setItem('token', 'fake-token');
     },

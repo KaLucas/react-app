@@ -1,7 +1,5 @@
 describe('Users Create', () => {
   beforeEach(() => {
-    cy.login();
-
     let getCall = 0;
 
     cy.intercept('GET', '**/collections/users/records*', (req) => {
@@ -24,7 +22,8 @@ describe('Users Create', () => {
       },
     }).as('create-user');
 
-    cy.visit('/admin/users-list');
+    cy.login();
+
     cy.wait('@get-users');
   });
 
