@@ -138,6 +138,8 @@ O projeto conta com testes **E2E (end-to-end)** utilizando **[Cypress](https://w
 
 Os testes são executados automaticamente via **[GitHub Actions](https://github.com/KaLucas/react-app/actions/workflows/e2e.yml)** a cada push ou pull request na branch `master`, garantindo que nenhuma alteração quebre os fluxos existentes.
 
+> 💡 **Nota:** A cobertura de testes foi desenvolvida com auxílio de IA, com revisão e validação de cada caso de teste para garantir que refletem o comportamento real da aplicação.
+
 ### Executando os testes
 
 Abrindo a interface visual do Cypress:
