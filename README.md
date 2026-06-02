@@ -43,7 +43,6 @@
 - **[Material UI (MUI) v7](https://mui.com/)** — Biblioteca de componentes React baseada no Material Design
 - **[MUI X Data Grid](https://mui.com/x/react-data-grid/)** — Componente de tabela avançada para dados
 - **[MUI Icons](https://mui.com/material-ui/material-icons/)** — Ícones do Material Design
-- **[Font Awesome](https://fontawesome.com/)** — Biblioteca de ícones adicionais
 - **[Emotion](https://emotion.sh/)** — CSS-in-JS utilizado internamente pelo MUI
 
 ### Estado & Formulários

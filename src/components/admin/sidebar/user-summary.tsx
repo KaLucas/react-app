@@ -2,6 +2,7 @@ import { Card, CardContent, Typography, Box } from '@mui/material';
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import type { ReactElement } from 'react';
 import { formatDate } from '@utils/format-date';
+import { PeopleAlt } from '@utils/icons';
 
 type UserSummaryProps = {
   total: number;
@@ -21,7 +22,7 @@ const UserSummary = ({ total, createdAt }: UserSummaryProps): ReactElement => {
     >
       <CardContent>
         <Box display="flex" alignItems="center" gap={1} mb={1}>
-          <PeopleOutlineIcon sx={{ color: '#1976d2' }} />
+          <PeopleAlt color="info" />
           <Typography variant="body2" color="text.secondary">
             Total de usuários
           </Typography>

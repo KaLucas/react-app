@@ -1,9 +1,8 @@
-import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AppBar, Button, Toolbar, Typography, Stack } from '@mui/material';
 import type { ReactElement } from 'react';
 import type { modeProps } from '@routes/app-routes';
 import { useNavigate } from 'react-router-dom';
+import { DarkMode, LightMode } from '@utils/icons';
 
 export const Header = ({ toggleTheme, mode }: modeProps): ReactElement => {
   const navigate = useNavigate();
@@ -30,7 +29,7 @@ export const Header = ({ toggleTheme, mode }: modeProps): ReactElement => {
         </Typography>
         <Stack direction="row" spacing={1}>
           <Button onClick={toggleTheme} sx={{ color: 'text.primary' }}>
-            <FontAwesomeIcon icon={mode === 'light' ? faMoon : faSun} />
+            {mode === 'light' ? <DarkMode /> : <LightMode />}
           </Button>
           <Button
             data-test="redirect-button-admin"

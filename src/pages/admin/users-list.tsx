@@ -1,7 +1,7 @@
 import { useState, type ReactElement } from 'react';
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
 import { ptBR } from '@mui/x-data-grid/locales';
-import { EditIcon, DeleteIcon } from '@utils/icons';
+import { EditIcon, DeleteIcon, Add } from '@utils/icons';
 import IconButton from '@mui/material/IconButton';
 import { useGetUsersQuery } from '@services/api';
 import { Box, Button, LinearProgress, Typography } from '@mui/material';
@@ -11,8 +11,6 @@ import type { DatagridUsersList } from '@models/user.model';
 import { useAlert } from '@hooks/alert-hook';
 import { CustomAlert } from '@components/admin';
 import { API_CONFIG } from '@config/api.config';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export type DialogType = 'edit' | 'delete' | 'create' | 'none';
 
@@ -107,13 +105,16 @@ const UsersList = (): ReactElement => {
           <Button
             data-test="create-user"
             variant="contained"
-            startIcon={<FontAwesomeIcon icon={faPlus} />}
+            startIcon={<Add />}
             size="small"
             sx={{
               minHeight: 'unset',
               height: '38px',
               padding: '0 10px',
               boxShadow: 'none',
+              '& .MuiButton-startIcon svg': {
+                fontSize: '24px',
+              },
             }}
             onClick={() => setIsOpenDialog('create')}
           >

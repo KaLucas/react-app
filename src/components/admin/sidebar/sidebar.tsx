@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import {
   Box,
   Divider,
@@ -18,6 +16,7 @@ import { API_CONFIG } from '@config/api.config';
 import logo from '@assets/react-app.png';
 import UserSummary from './user-summary';
 import type { User } from '@models/user.model';
+import { Logout } from '@utils/icons';
 
 export const Sidebar = (): ReactElement => {
   const navigate = useNavigate();
@@ -46,11 +45,11 @@ export const Sidebar = (): ReactElement => {
           <UserSummary total={total} createdAt={createdAt} />
         </ListItem>
         <ListItem disablePadding sx={{ mt: 'auto' }} data-test="logout-button">
-          <ListItemButton sx={{ gap: 1 }} onClick={handleLogout}>
+          <ListItemButton sx={{ gap: 1, justifyContent: 'center' }} onClick={handleLogout}>
             <ListItemIcon sx={{ minWidth: 0 }}>
-              <FontAwesomeIcon icon={faSignOutAlt} />
+              <Logout />
             </ListItemIcon>
-            <ListItemText primary="Logout" />
+            <ListItemText primary="Logout" sx={{ flex: 'none' }} />
           </ListItemButton>
         </ListItem>
       </List>
