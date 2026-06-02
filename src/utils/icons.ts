@@ -6,3 +6,4 @@ export { default as Logout } from '@mui/icons-material/Logout';
 export { default as PeopleAlt } from '@mui/icons-material/PeopleAlt';
 export { default as LightMode } from '@mui/icons-material/LightMode';
 export { default as DarkMode } from '@mui/icons-material/DarkMode';
+export { default as Report } from '@mui/icons-material/Report';

@@ -17,7 +17,7 @@ describe('Routes', () => {
   });
 
   context('Public Routes', () => {
-    it.only('Should navigate to public users list from login page', () => {
+    it('Should navigate to public users list from login page', () => {
       cy.visit('/admin');
 
       cy.get('[data-test=redirect-button-list]').click();

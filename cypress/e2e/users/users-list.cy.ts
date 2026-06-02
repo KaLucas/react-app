@@ -5,7 +5,6 @@ describe('Users List', () => {
     }).as('get-users-list');
 
     cy.login();
-
     cy.wait('@get-users-list');
   });
 
@@ -53,5 +52,16 @@ describe('Users List', () => {
       'contain.text',
       'dawn.summers@sunnydale.com',
     );
+  });
+
+  it('Should show error message when request is 500', () => {
+    cy.intercept('GET', '**/collections/users/records*', {
+      statusCode: 500,
+    }).as('get-users-list');
+
+    cy.login();
+    cy.wait('@get-users-list');
+
+    cy.get('[data-testId="error-message"]').should('contain.text', 'Erro ao carregar usuários');
   });
 });

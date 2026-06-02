@@ -123,7 +123,12 @@ const UsersList = (): ReactElement => {
         </Box>
         {isFetchingUsers && <LinearProgress />}
         {isUsersError ? (
-          <Typography>Erro ao carregar usuários</Typography>
+          <Typography
+            sx={{ textAlign: 'center', fontSize: '20px', marginTop: '20px' }}
+            data-testId="error-message"
+          >
+            Erro ao carregar usuários
+          </Typography>
         ) : (
           <Box data-test="users-list-result">
             <DataGrid
