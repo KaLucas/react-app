@@ -30,8 +30,6 @@ export const DeleteUserDialog = ({
   const { first_name, last_name, id } = selectedValue;
   const [deleteUser] = useDeleteUserMutation();
 
-  console.log('selectedValue', selectedValue);
-
   const { handleSubmit, formState } = useForm({ mode: 'all' });
   const { isSubmitting } = formState;
 
